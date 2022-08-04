@@ -11,12 +11,15 @@ const reducer = (state, action) => {
     };
   }
   if (action.type === 'DECREASE') {
-    const tempCart = state.cart.map((item) => {
-      if (item.id === action.payload) {
-        return { ...item, amount: item.amount - 1 };
-      }
-      return item;
-    });
+    const tempCart = state.cart
+      .map((item) => {
+        if (item.id === action.payload) {
+          return { ...item, amount: item.amount - 1 };
+        }
+        return item;
+      })
+      //  Short and optimized way to return the input from map and directly apply filter to check if item.amount is greater than 0 then return
+      .filter((item) => item.amount !== 0);
     return { ...state, cart: tempCart };
   }
   return state;

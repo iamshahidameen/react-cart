@@ -25,14 +25,18 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'REMOVE_ITEM', payload: id });
   };
   const decrease = (id) => {
-    const decreasedItem = state.cart.filter((item) => item.id === id);
-    console.log(decreasedItem);
-    console.log(decreasedItem, 'item obj');
-    if (decreasedItem[0].amount <= 0) {
-      dispatch({ type: 'REMOVE_ITEM', payload: id });
-    } else {
-      dispatch({ type: 'DECREASE', payload: id });
-    }
+    dispatch({ type: 'DECREASE', payload: id });
+
+    //  Old/long method for decrease + remove item from list
+
+    // const decreasedItem = state.cart.filter((item) => item.id === id);
+    // console.log(decreasedItem);
+    // console.log(decreasedItem, 'item obj');
+    // if (decreasedItem[0].amount < 1) {
+    //   dispatch({ type: 'REMOVE_ITEM', payload: id });
+    // } else {
+    //   dispatch({ type: 'DECREASE', payload: id });
+    // }
   };
 
   return (
