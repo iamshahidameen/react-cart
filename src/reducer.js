@@ -31,6 +31,21 @@ const reducer = (state, action) => {
     });
     return { ...state, cart: tempCart };
   }
+  if (action.type === 'GET_TOTAL') {
+    let totalPrice = 0;
+
+    state.cart.map((cartItem) => {
+      return (totalPrice += cartItem.amount * cartItem.price);
+    });
+    let totalItems = 0;
+    state.cart.map((cartItem) => {
+      return (totalItems += cartItem.amount);
+    });
+    console.log(totalPrice, 'total price');
+    console.log(totalItems, 'total items');
+
+    return { ...state, total: totalPrice, amount: totalItems };
+  }
   return state;
 };
 
