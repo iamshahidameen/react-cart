@@ -60,7 +60,7 @@ const reducer = (state, action) => {
   if (action.type === 'GET_ITEMS') {
     return { ...state, loading: false, cart: action.payload };
   }
-  return state;
+  throw new Error('No Matching action type');
 };
 
 export default reducer;
