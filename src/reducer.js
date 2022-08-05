@@ -50,6 +50,12 @@ const reducer = (state, action) => {
       amount: totalItems,
     };
   }
+  if (action.type === 'LOADING') {
+    return { ...state, loading: true };
+  }
+  if (action.type === 'GET_ITEMS') {
+    return { ...state, loading: false, cart: action.payload };
+  }
   return state;
 };
 
