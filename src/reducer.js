@@ -44,7 +44,11 @@ const reducer = (state, action) => {
     console.log(totalPrice, 'total price');
     console.log(totalItems, 'total items');
 
-    return { ...state, total: totalPrice, amount: totalItems };
+    return {
+      ...state,
+      total: parseFloat(totalPrice.toFixed(2)),
+      amount: totalItems,
+    };
   }
   return state;
 };
