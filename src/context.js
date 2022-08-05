@@ -23,8 +23,13 @@ const AppProvider = ({ children }) => {
   const removeItem = (id) => {
     dispatch({ type: 'REMOVE_ITEM', payload: id });
   };
-  const increase = (id) => {
-    dispatch({ type: 'INCREASE', payload: id });
+  const toggleAmount = (id, type) => {
+    if (type === 'increase') {
+      dispatch({ type: 'INCREASE', payload: id });
+    }
+    if (type === 'decrease') {
+      dispatch({ type: 'DECREASE', payload: id });
+    }
 
     //  Old/long method for decrease + remove item from list
 
@@ -37,21 +42,6 @@ const AppProvider = ({ children }) => {
     //   dispatch({ type: 'DECREASE', payload: id });
     // }
   };
-  const decrease = (id) => {
-    dispatch({ type: 'DECREASE', payload: id });
-
-    //  Old/long method for decrease + remove item from list
-
-    // const decreasedItem = state.cart.filter((item) => item.id === id);
-    // console.log(decreasedItem);
-    // console.log(decreasedItem, 'item obj');
-    // if (decreasedItem[0].amount < 1) {
-    //   dispatch({ type: 'REMOVE_ITEM', payload: id });
-    // } else {
-    //   dispatch({ type: 'DECREASE', payload: id });
-    // }
-  };
-
   const fetchData = async () => {
     dispatch({ type: 'LOADING' });
     const response = await fetch(url);
@@ -71,8 +61,7 @@ const AppProvider = ({ children }) => {
         ...state,
         clearCart,
         removeItem,
-        decrease,
-        increase,
+        toggleAmount,
       }}
     >
       {children}
