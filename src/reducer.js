@@ -10,27 +10,31 @@ const reducer = (state, action) => {
       cart: state.cart.filter((item) => item.id !== action.payload),
     };
   }
-  if (action.type === 'DECREASE') {
-    const tempCart = state.cart
-      .map((item) => {
-        if (item.id === action.payload) {
-          return { ...item, amount: item.amount - 1 };
+  if (action.type === 'TOGGLE_AMOUNT') {
+    const { id, type } = action.payload;
+    if (type === 'increase') {
+      const tempCart = state.cart.map((item) => {
+        if (item.id === id) {
+          return { ...item, amount: item.amount + 1 };
         }
         return item;
-      })
-      //  Short and optimized way to return the input from map and directly apply filter to check if item.amount is greater than 0 then return
-      .filter((item) => item.amount !== 0);
-    return { ...state, cart: tempCart };
+      });
+      return { ...state, cart: tempCart };
+    }
+    if (type === 'decrease') {
+      const tempCart = state.cart
+        .map((item) => {
+          if (item.id === id) {
+            return { ...item, amount: item.amount - 1 };
+          }
+          return item;
+        })
+        //  Short and optimized way to return the input from map and directly apply filter to check if item.amount is greater than 0 then return
+        .filter((item) => item.amount !== 0);
+      return { ...state, cart: tempCart };
+    }
   }
-  if (action.type === 'INCREASE') {
-    const tempCart = state.cart.map((item) => {
-      if (item.id === action.payload) {
-        return { ...item, amount: item.amount + 1 };
-      }
-      return item;
-    });
-    return { ...state, cart: tempCart };
-  }
+
   if (action.type === 'GET_TOTAL') {
     let totalPrice = 0;
 

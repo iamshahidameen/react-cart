@@ -24,12 +24,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'REMOVE_ITEM', payload: id });
   };
   const toggleAmount = (id, type) => {
-    if (type === 'increase') {
-      dispatch({ type: 'INCREASE', payload: id });
-    }
-    if (type === 'decrease') {
-      dispatch({ type: 'DECREASE', payload: id });
-    }
+    dispatch({ type: 'TOGGLE_AMOUNT', payload: { id, type } });
 
     //  Old/long method for decrease + remove item from list
 
